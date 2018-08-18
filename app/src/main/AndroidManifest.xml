@@ -31,7 +31,9 @@
         <activity android:name=".list" />
         <activity android:name=".QuizSelect" />
         <activity android:name=".QuizView" />
-        <activity android:name=".OnlineMatching"></activity>
+        <activity android:name=".OnlineMatching" />
+        <activity android:name=".OnQuiz" />
+        <activity android:name=".OnlineQuizQuestions"></activity>
     </application>
 
 </manifest>

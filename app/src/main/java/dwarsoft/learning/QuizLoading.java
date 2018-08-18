@@ -110,8 +110,6 @@ public class QuizLoading extends AppCompatActivity {
                         editor.putInt("count", count);
                         for(int i=0;i<questions.size();i++)
                         {
-                            editor.remove("question" + i);
-                            editor.putString("question" + i, questions.get(i));
 
                             editor.remove("question" + i);
                             editor.putString("question" + i, questions.get(i));
