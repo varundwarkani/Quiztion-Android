@@ -30,7 +30,8 @@
         <activity android:name=".QuizLoading" />
         <activity android:name=".list" />
         <activity android:name=".QuizSelect" />
-        <activity android:name=".QuizView"></activity>
+        <activity android:name=".QuizView" />
+        <activity android:name=".OnlineMatching"></activity>
     </application>
 
 </manifest>

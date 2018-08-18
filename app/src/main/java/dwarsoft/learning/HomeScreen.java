@@ -111,6 +111,10 @@ public class HomeScreen extends AppCompatActivity
         }  else if (id == R.id.nav_list) {
             Intent intent = new Intent (HomeScreen.this, QuizView.class);
             startActivity(intent);
+        } else if (id==R.id.nav_online)
+        {
+            Intent intent = new Intent (HomeScreen.this, OnlineMatching.class);
+            startActivity(intent);
         } else if (id==R.id.nav_logout){
             Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show();
             new AlertDialog.Builder(this)

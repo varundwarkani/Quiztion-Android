@@ -24,7 +24,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class QuizLoading extends AppCompatActivity {
 
@@ -172,6 +177,10 @@ public class QuizLoading extends AppCompatActivity {
                 if (user != null) {
                     uid = user.getUid();
                     //for leaderboard
+                    final HashMap<String, Integer> map = new HashMap<String, Integer>();
+                    ValueComparator bvc = new ValueComparator(map);
+                    final TreeMap<String, Integer> sorted_map = new TreeMap<String, Integer>(bvc);
+
                     DatabaseReference usersReff = FirebaseDatabase.getInstance().getReference("leaderboard/"+code);
                     usersReff.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -180,10 +189,17 @@ public class QuizLoading extends AppCompatActivity {
                             namelist.clear();
                             scorelist.clear();
 
-                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren())
+                            {
                                 namelist.add(postSnapshot.getKey());
                                 scorelist.add(postSnapshot.getValue().toString());
+                                map.put(postSnapshot.getKey(),Integer.parseInt(postSnapshot.getValue().toString()));
                             }
+
+
+                            //get from sorted and store again in the list
+                            //namelist.clear();
+                            //scorelist.clear();
 
 
                             rvLeaderboard.setHasFixedSize(true);
@@ -262,5 +278,24 @@ public class QuizLoading extends AppCompatActivity {
             quizModelArrayList.add(new LeaderboardModel(namelist.get(i),scorelist.get(i)));
         }
         return quizModelArrayList;
+    }
+}
+
+
+class ValueComparator implements Comparator<String> {
+    Map<String, Integer> base;
+
+    public ValueComparator(Map<String, Integer> base) {
+        this.base = base;
+    }
+
+    // Note: this comparator imposes orderings that are inconsistent with
+    // equals.
+    public int compare(String a, String b) {
+        if (base.get(a) >= base.get(b)) {
+            return -1;
+        } else {
+            return 1;
+        } // returning 0 would merge keys
     }
 }
