@@ -61,6 +61,13 @@
             android:text="Next"
             android:layout_below="@+id/rgOnlineQuizOptions"/>
 
+        <Button
+            android:id="@+id/btOnlineProceed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proceed"
+            android:layout_below="@+id/btOnlineQuiz"/>
+
     </RelativeLayout>
 
     <RelativeLayout

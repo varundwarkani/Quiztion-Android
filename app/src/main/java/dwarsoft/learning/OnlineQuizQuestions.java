@@ -37,6 +37,8 @@ public class OnlineQuizQuestions extends AppCompatActivity {
     private SharedPreferences categoriesPref;
     private SharedPreferences.Editor editor;
 
+    Button btOnlineProceed;
+
     TextView tvOnlineOwn,tvOnlineOpposite;
     ProgressBar pbOnlineOpposite,pbOnlineOwn;
 
@@ -66,6 +68,7 @@ public class OnlineQuizQuestions extends AppCompatActivity {
         rbOnlineQuizOption2 = findViewById(R.id.rbOnlineQuizOption2);
         rbOnlineQuizOption3 = findViewById(R.id.rbOnlineQuizOption3);
         rbOnlineQuizOption4 = findViewById(R.id.rbOnlineQuizOption4);
+        btOnlineProceed = findViewById(R.id.btOnlineProceed);
 
         SharedPreferences catPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
         correct = catPref.getInt("onlinecorrect", 0);
@@ -166,6 +169,13 @@ public class OnlineQuizQuestions extends AppCompatActivity {
                                         databaseReference.child("playing/"+uid+"/question").setValue(a);
                                         //set in db also
 
+                                        btOnlineProceed.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                check();
+                                            }
+                                        });
+
                                         if (selectedtext.equals(correctanswer))
                                         {
 
@@ -180,7 +190,6 @@ public class OnlineQuizQuestions extends AppCompatActivity {
                                             FirebaseDatabase database1 = FirebaseDatabase.getInstance();
                                             DatabaseReference databaseReference1 = database1.getReference();
                                             databaseReference1.child("playing/"+uid+"/points").setValue(newupdate);
-
 
                                             new AlertDialog.Builder(OnlineQuizQuestions.this)
                                                     .setMessage("Correct answer! "+explanation+" .")
@@ -197,13 +206,7 @@ public class OnlineQuizQuestions extends AppCompatActivity {
                                             new AlertDialog.Builder(OnlineQuizQuestions.this)
                                                     .setMessage("Wrong answer! "+explanation+" .")
                                                     .setCancelable(false)
-                                                    .setPositiveButton("Next", new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                                            //     finish();
-                                                            //   startActivity(getIntent());
-                                                        }
-                                                    })
+                                                    .setPositiveButton("Next",null)
                                                     .show();
                                         }
                                         if (last==0)
@@ -220,8 +223,8 @@ public class OnlineQuizQuestions extends AppCompatActivity {
                                                         public void onClick(DialogInterface dialogInterface, int i) {
                                                             Toast.makeText(OnlineQuizQuestions.this, "Finished", Toast.LENGTH_SHORT).show();
 
-                                                            //       Intent intent = new Intent (QuizQuestions.this, HomeScreen.class);
-                                                            //     startActivity(intent);
+                                                            Intent intent = new Intent (OnlineQuizQuestions.this, ResultPage.class);
+                                                            startActivity(intent);
                                                         }
                                                     })
                                                     .show();

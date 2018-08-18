@@ -34,7 +34,8 @@
         <activity android:name=".OnlineMatching" />
         <activity android:name=".OnQuiz" />
         <activity android:name=".OnlineQuizQuestions" />
-        <activity android:name=".ResultPage"></activity>
+        <activity android:name=".ResultPage" />
+        <activity android:name=".QuizResultPage"></activity>
     </application>
 
 </manifest>

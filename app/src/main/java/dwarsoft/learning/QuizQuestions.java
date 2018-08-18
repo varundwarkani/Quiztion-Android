@@ -152,9 +152,7 @@ public class QuizQuestions extends AppCompatActivity {
                             .setPositiveButton("FINISH", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(QuizQuestions.this, "Finished", Toast.LENGTH_SHORT).show();
-
-                                    Intent intent = new Intent (QuizQuestions.this, HomeScreen.class);
+                                    Intent intent = new Intent (QuizQuestions.this, QuizResultPage.class);
                                     startActivity(intent);
                                 }
                             })
