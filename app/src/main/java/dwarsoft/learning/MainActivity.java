@@ -5,12 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -41,12 +43,23 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth.AuthStateListener mAuthListener;
     String uid,name,mail;
     int type = 3;
+    int i = 0;
+
+    ProgressBar mainprogress;
     //type 1 for student, type 2 for teachers
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = new Intent (MainActivity.this, HomeScreen.class);
+        startActivity(intent);
+
+        mainprogress = findViewById(R.id.mainprogress);
+        mainprogress.setVisibility(View.GONE);
+        btEnter = findViewById(R.id.btEnter);
+        btTeacher = findViewById(R.id.btTeacher);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -67,9 +80,6 @@ public class MainActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(MainActivity.this, gso);
 
         mGoogleSignInClient = GoogleSignIn.getClient(MainActivity.this, gso);
-
-        btEnter = findViewById(R.id.btEnter);
-        btTeacher = findViewById(R.id.btTeacher);
         
         btTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 {
                     type = 2;
                     signIn();
-                    Toast.makeText(MainActivity.this, "Entering in...", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -92,9 +101,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (isNetworkAvailable())
                 {
+
+                    mainprogress.setVisibility(View.VISIBLE);
                     type = 1;
                     signIn();
-                    Toast.makeText(MainActivity.this, "Entering in...", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -129,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
+                mainprogress.setVisibility(View.GONE);
                 // Google Sign In failed, update UI appropriately
                 Toast.makeText(this, "Google sign in failed", Toast.LENGTH_SHORT).show();
             }
@@ -149,20 +160,19 @@ public class MainActivity extends AppCompatActivity {
                     
                     if (type==1)
                     {
-                        Toast.makeText(MainActivity.this, "Student's Login success", Toast.LENGTH_SHORT).show();
                         DatabaseReference databaseref = FirebaseDatabase.getInstance().getReference();
                         databaseref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.hasChild("profile/"+uid))
                                 {
-                                    Toast.makeText(MainActivity.this, "User already exists...", Toast.LENGTH_SHORT).show();
+                                    mainprogress.setVisibility(View.GONE);
                                     Intent intent = new Intent (MainActivity.this, HomeScreen.class);
                                     startActivity(intent);
                                 }
                                 else
                                 {
-                                    Toast.makeText(MainActivity.this, "New user...", Toast.LENGTH_SHORT).show();
+                                    mainprogress.setVisibility(View.GONE);
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference databaseReference = database.getReference();
                                     databaseReference.child("profile/"+uid+"/name").setValue(name);
@@ -178,39 +188,10 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                     }
-                    else if (type==2)
-                    {
-                        Toast.makeText(MainActivity.this, "Teacher's portal login success...", Toast.LENGTH_SHORT).show();
-                        DatabaseReference databaseref = FirebaseDatabase.getInstance().getReference();
-                        databaseref.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.hasChild("profile/"+uid))
-                                {
-                                    Toast.makeText(MainActivity.this, "User already exists...", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent (MainActivity.this, TeacherHome.class);
-                                    startActivity(intent);
-                                }
-                                else
-                                {
-                                    Toast.makeText(MainActivity.this, "New user...", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent (MainActivity.this, TeacherHome.class);
-                                    startActivity(intent);
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
-                    else {
-                        Toast.makeText(MainActivity.this, "Type error", Toast.LENGTH_SHORT).show();
-                    }
                 }
                 else
                 {
+                    mainprogress.setVisibility(View.GONE);
                     Toast.makeText(MainActivity.this, "Sign in failed...", Toast.LENGTH_SHORT).show();
                 }
             }

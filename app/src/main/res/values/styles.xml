@@ -25,4 +25,8 @@
         <item name="android:minWidth">200dp</item>
     </style>
 
+    <style name="ProgressBarStyle">
+        <item name="colorAccent">#FFFFFF </item>
+    </style>
+
 </resources>

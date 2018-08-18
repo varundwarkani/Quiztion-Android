@@ -8,4 +8,67 @@
     tools:context=".HomeScreen"
     tools:showIn="@layout/app_bar_home_screen">
 
+    <RelativeLayout
+        android:id="@+id/rlspins"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradiant">
+
+        <RelativeLayout
+            android:id="@+id/gamesection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="#6159EF">
+
+            <ImageView
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@drawable/quiztiondesc" />
+
+            <Button
+                android:id="@+id/btPlay"
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="280dp"
+                android:background="@drawable/current"
+                android:textColor="#BF5012"
+                android:textStyle="bold"
+                android:layout_marginLeft="92dp"
+                android:text="Current Subjects"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/btHowToPlay"
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_below="@+id/btPlay"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/join"
+                android:textColor="#BF5012"
+                android:layout_marginLeft="92dp"
+                android:textStyle="bold"
+                android:text="Join Subjects"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/btReferral"
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_below="@+id/btHowToPlay"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/online"
+                android:textColor="#BF5012"
+                android:layout_marginLeft="92dp"
+                android:text="Online Challenge"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
 </RelativeLayout>

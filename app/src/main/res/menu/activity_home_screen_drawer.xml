@@ -4,23 +4,21 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_list"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="List" />
-        <item
-            android:id="@+id/nav_join"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Join" />
 
         <item
-            android:id="@+id/nav_online"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Online" />
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/profile_icon"
+            android:title="Dashboard" />
+
+
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/contactus"
+            android:title="Contact us" />
 
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/logout_icon"
             android:title="Logout" />
 
     </group>

@@ -3,6 +3,7 @@ package dwarsoft.learning;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +29,7 @@ public class HomeScreen extends AppCompatActivity
 
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
+    Button btPlay,btHowToPlay,btReferral;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +38,41 @@ public class HomeScreen extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        btPlay = findViewById(R.id.btPlay);
+        btHowToPlay = findViewById(R.id.btHowToPlay);
+        btReferral = findViewById(R.id.btReferral);
+
+        btHowToPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (HomeScreen.this, list.class);
+                startActivity(intent);
+            }
+        });
+
+        btPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (HomeScreen.this, QuizView.class);
+                startActivity(intent);
+            }
+        });
+
+        btReferral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (HomeScreen.this, OnlineMatching.class);
+                startActivity(intent);
+            }
+        });
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Toast.makeText(HomeScreen.this, "User is logged in...", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(HomeScreen.this, "No user data available", Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -105,18 +134,11 @@ public class HomeScreen extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_join) {
-            Intent intent = new Intent (HomeScreen.this, list.class);
-            startActivity(intent);
-        }  else if (id == R.id.nav_list) {
-            Intent intent = new Intent (HomeScreen.this, QuizView.class);
-            startActivity(intent);
-        } else if (id==R.id.nav_online)
-        {
-            Intent intent = new Intent (HomeScreen.this, OnlineMatching.class);
-            startActivity(intent);
-        } else if (id==R.id.nav_logout){
-            Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show();
+
+        //list
+        //quiz view
+        //online
+        if (id==R.id.nav_logout){
             new AlertDialog.Builder(this)
                     .setMessage("Are you sure you want to logout?")
                     .setCancelable(false)
@@ -130,6 +152,12 @@ public class HomeScreen extends AppCompatActivity
                     })
                     .setNegativeButton("No", null)
                     .show();
+        }
+        else if (id==R.id.nav_contact)
+        {
+            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                    "mailto","dwarsoft@gmail.com", null));
+            startActivity(Intent.createChooser(emailIntent, "Contact us"));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -9,15 +9,24 @@
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="420dp"
-        android:background="@color/background"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/quiztion"
         android:id="@+id/relativeLayout">
 
+        <ImageView
+            android:layout_width="150dp"
+            android:visibility="gone"
+            android:layout_height="150dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="100dp"
+            android:src="@drawable/quiztion"
+            />
         <TextView
             android:id="@+id/textView8"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -50,6 +59,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="13dp"
+            android:visibility="gone"
             android:text="Developed by Team DevOops"
             android:textColor="#ffffff"
             android:textSize="18dp"
@@ -59,17 +69,15 @@
 
     <Button
         android:id="@+id/btEnter"
-        android:layout_width="196dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@color/background"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="Student's Portal"
-        android:textColor="#ffffff"
-        android:textSize="15dp"
+        android:background="#76E10D"
+        android:text="Let's Quiz Up"
+        android:textColor="#BF5012"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <Button
@@ -84,6 +92,7 @@
         android:background="#BDBDBD"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:visibility="gone"
         android:text="Teacher's Portal"
         android:textColor="#424242"
         android:textSize="15dp"
@@ -124,5 +133,14 @@
         android:textStyle="bold" />
 
 
+    <ProgressBar
+        android:id="@+id/mainprogress"
+        android:theme="@style/ProgressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="127dp"
+        android:layout_weight="1" />
 
 </RelativeLayout>
