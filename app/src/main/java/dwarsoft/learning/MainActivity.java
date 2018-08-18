@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent (MainActivity.this, QuizLoading.class);
-        startActivity(intent);
+    //    Intent intent = new Intent (MainActivity.this, list.class);
+      //  startActivity(intent);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {

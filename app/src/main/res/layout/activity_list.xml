@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".list">
+
+    <TextView
+        android:id="@+id/selectcoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="111dp"
+        android:layout_marginTop="83dp"
+        android:padding="5dp"
+        android:text="Select College"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinnerCollege"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="105dp"
+        android:layout_below="@+id/selectcoll"
+        android:popupBackground="#FFF" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Department"
+        android:textSize="20dp"
+        android:id="@+id/deptheader"
+        android:textStyle="bold"
+        android:layout_below="@+id/spinnerCollege"
+        android:layout_marginStart="125dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerDept"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/deptheader"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="100dp"
+        android:popupBackground="#FFF" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year"
+        android:textSize="20dp"
+        android:id="@+id/yearheader"
+        android:textStyle="bold"
+        android:layout_below="@+id/spinnerDept"
+        android:layout_marginStart="165dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerYear"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/yearheader"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="100dp"
+        android:popupBackground="#FFF" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Room"
+        android:textSize="20dp"
+        android:id="@+id/roomheader"
+        android:textStyle="bold"
+        android:layout_below="@+id/spinnerYear"
+        android:layout_marginStart="165dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerRoom"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/roomheader"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="100dp"
+        android:popupBackground="#FFF" />
+
+    <Button
+        android:id="@+id/btContinue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerRoom"
+        android:layout_marginStart="120dp"
+        android:textStyle="bold"
+        android:text="CONTINUE"
+        android:textSize="20dp"/>
+
+</RelativeLayout>

@@ -106,7 +106,8 @@ public class HomeScreen extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_list) {
-            Toast.makeText(this, "list", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent (HomeScreen.this, list.class);
+            startActivity(intent);
         }  else if (id == R.id.nav_list) {
             Toast.makeText(this, "join", Toast.LENGTH_SHORT).show();
         } else if (id==R.id.nav_logout){

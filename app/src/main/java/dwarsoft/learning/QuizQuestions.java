@@ -25,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import static dwarsoft.learning.QuizLoading.CATPREF;
+
 public class QuizQuestions extends AppCompatActivity {
 
     FirebaseAuth mAuth;
@@ -32,12 +34,12 @@ public class QuizQuestions extends AppCompatActivity {
     String uid;
     private SharedPreferences categoriesPref;
     private SharedPreferences.Editor editor;
-    public static final String CATPREF = "catpref";
 
     int last = 0;
     Button btQuiz;
 
     int answered;
+    int correct,wrong;
 
     String correctanswer,explanation;
     TextView tvQuizQuestions;
@@ -58,6 +60,8 @@ public class QuizQuestions extends AppCompatActivity {
 
         SharedPreferences catPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
         int size = catPref.getInt("count", 0);
+        correct = catPref.getInt("correct", 0);
+        wrong = catPref.getInt("wrong", 0);
         final int answered = catPref.getInt("answered", 0);
 
         if (answered<size)
@@ -92,8 +96,6 @@ public class QuizQuestions extends AppCompatActivity {
                 RadioButton r = (RadioButton)  rgQuizOptions.getChildAt(idx);
                 String selectedtext = r.getText().toString();
 
-                if (last==0)
-                {
                     categoriesPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
                     editor = categoriesPref.edit();
                     editor.putInt("answered",answered+1);
@@ -103,7 +105,9 @@ public class QuizQuestions extends AppCompatActivity {
                     {
 
                         //credit points to the user
-
+                        correct = correct + 1;
+                        editor.putInt("correct",correct);
+                        editor.commit();
 
                         new AlertDialog.Builder(QuizQuestions.this)
                                 .setMessage("Correct answer! "+explanation+" .")
@@ -119,6 +123,10 @@ public class QuizQuestions extends AppCompatActivity {
                     }
                     else
                     {
+                        wrong = wrong + 1;
+                        editor.putInt("wrong",wrong);
+                        editor.commit();
+
                         new AlertDialog.Builder(QuizQuestions.this)
                                 .setMessage("Wrong answer! "+explanation+" .")
                                 .setCancelable(false)
@@ -131,9 +139,23 @@ public class QuizQuestions extends AppCompatActivity {
                                 })
                                 .show();
                     }
+                if (last==0)
+                {
+                    
                 }
-                else {
-                    Toast.makeText(QuizQuestions.this, "Last question answered", Toast.LENGTH_SHORT).show();
+                else
+                {
+                    new AlertDialog.Builder(QuizQuestions.this)
+                            .setMessage("You have finished the quiz. Results: Right Answers: "+String.valueOf(correct)+", Wrong answer: "+String.valueOf(wrong))
+                            .setCancelable(false)
+                            .setPositiveButton("FINISH", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(QuizQuestions.this, "Finished", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .show();
+                    //last ques answered.
                 }
             }
         });
