@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1011086013092",
+    "firebase_url": "https://learningassistance-1201c.firebaseio.com",
+    "project_id": "learningassistance-1201c",
+    "storage_bucket": "learningassistance-1201c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011086013092:android:75d080e9a8c091bc",
+        "android_client_info": {
+          "package_name": "dwarsoft.learning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011086013092-0ls6qei47et2vao2ve5uqlaifq0hvdto.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dwarsoft.learning",
+            "certificate_hash": "38b0f1407220a273398f036e83462d570d906d47"
+          }
+        },
+        {
+          "client_id": "1011086013092-r9jdr8pr2qi41k63m9n6mo5p19tl48du.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7qkAC_Or4q-490zUIofLDR9t0egXhVZ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011086013092-r9jdr8pr2qi41k63m9n6mo5p19tl48du.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

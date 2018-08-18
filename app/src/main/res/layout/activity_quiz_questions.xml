@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="match_parent"
+    tools:context=".QuizQuestions">
+
+        <TextView
+            android:id="@+id/tvQuizQuestions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Question goes here"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <RadioGroup
+            android:id="@+id/rgQuizOptions"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvQuizQuestions">
+
+            <RadioButton
+                android:id="@+id/rbQuizOption1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Option1"/>
+
+            <RadioButton
+                android:id="@+id/rbQuizOption2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option2"/>
+
+            <RadioButton
+                android:id="@+id/rbQuizOption3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option3"/>
+
+            <RadioButton
+                android:id="@+id/rbQuizOption4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option4"/>
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
