@@ -40,7 +40,7 @@ public class QuizLoading extends AppCompatActivity {
     ArrayList<String> option2 = new ArrayList<String>();
     ArrayList<String> option3 = new ArrayList<String>();
     ArrayList<String> option4 = new ArrayList<String>();
-    ArrayList<String> userselected = new ArrayList<String>();
+    ArrayList<String> explanation = new ArrayList<String>();
     String correct = "0",wrong = "0";
     int count = -1;
 
@@ -54,7 +54,7 @@ public class QuizLoading extends AppCompatActivity {
         option2.clear();
         option3.clear();
         option4.clear();
-        userselected.clear();
+        explanation.clear();
 
         btStartQuiz = findViewById(R.id.btStartQuiz);
 
@@ -76,9 +76,15 @@ public class QuizLoading extends AppCompatActivity {
 
                         editor.putInt("answered",0);
 
+                        editor.putInt("correct",0);
+                        editor.putInt("wrong",0);
+
                         editor.putInt("count", count);
                         for(int i=0;i<questions.size();i++)
                         {
+                            editor.remove("question" + i);
+                            editor.putString("question" + i, questions.get(i));
+
                             editor.remove("question" + i);
                             editor.putString("question" + i, questions.get(i));
 
@@ -96,6 +102,9 @@ public class QuizLoading extends AppCompatActivity {
 
                             editor.remove("option4" + i);
                             editor.putString("option4" + i, option4.get(i));
+
+                            editor.remove("explanation" + i);
+                            editor.putString("explanation" + i, explanation.get(i));
                         }
                         editor.commit();
 
@@ -159,6 +168,7 @@ public class QuizLoading extends AppCompatActivity {
                                     option2.add(postSnapshot.child("option2").getValue().toString());
                                     option3.add(postSnapshot.child("option3").getValue().toString());
                                     option4.add(postSnapshot.child("option4").getValue().toString());
+                                    explanation.add(postSnapshot.child("explanation").getValue().toString());
                                     correctoption.add(postSnapshot.child("correct").getValue().toString());
 
 

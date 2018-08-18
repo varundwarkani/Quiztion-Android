@@ -1,8 +1,10 @@
 package dwarsoft.learning;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,8 +38,8 @@ public class QuizQuestions extends AppCompatActivity {
     Button btQuiz;
 
     int answered;
-    String correct = "0",wrong = "0";
 
+    String correctanswer,explanation;
     TextView tvQuizQuestions;
     RadioGroup rgQuizOptions;
     RadioButton rbQuizOption1,rbQuizOption2,rbQuizOption3,rbQuizOption4;
@@ -66,8 +68,11 @@ public class QuizQuestions extends AppCompatActivity {
             rbQuizOption2.setText(catPref.getString("option2"+answered,null));
             rbQuizOption3.setText(catPref.getString("option3"+answered,null));
             rbQuizOption4.setText(catPref.getString("option4"+answered,null));
+            correctanswer = catPref.getString("correct"+answered,null);
+            explanation = catPref.getString("explanation"+answered,null);
+            
         }
-        if (answered==size)
+        if (answered==size-1)
         {
             last = 1;
         }
@@ -81,6 +86,12 @@ public class QuizQuestions extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                int radioButtonID = rgQuizOptions.getCheckedRadioButtonId();
+                View radioButton = rgQuizOptions.findViewById(radioButtonID);
+                int idx = rgQuizOptions.indexOfChild(radioButton);
+                RadioButton r = (RadioButton)  rgQuizOptions.getChildAt(idx);
+                String selectedtext = r.getText().toString();
+
                 if (last==0)
                 {
                     categoriesPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
@@ -88,8 +99,38 @@ public class QuizQuestions extends AppCompatActivity {
                     editor.putInt("answered",answered+1);
                     editor.commit();
 
-                    finish();
-                    startActivity(getIntent());
+                    if (selectedtext.equals(correctanswer))
+                    {
+
+                        //credit points to the user
+
+
+                        new AlertDialog.Builder(QuizQuestions.this)
+                                .setMessage("Correct answer! "+explanation+" .")
+                                .setCancelable(false)
+                                .setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                        startActivity(getIntent());
+                                    }
+                                })
+                                .show();
+                    }
+                    else
+                    {
+                        new AlertDialog.Builder(QuizQuestions.this)
+                                .setMessage("Wrong answer! "+explanation+" .")
+                                .setCancelable(false)
+                                .setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                        startActivity(getIntent());
+                                    }
+                                })
+                                .show();
+                    }
                 }
                 else {
                     Toast.makeText(QuizQuestions.this, "Last question answered", Toast.LENGTH_SHORT).show();
