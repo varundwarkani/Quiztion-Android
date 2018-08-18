@@ -7,9 +7,12 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class QuizLoading extends AppCompatActivity {
 
@@ -30,6 +34,8 @@ public class QuizLoading extends AppCompatActivity {
     private SharedPreferences categoriesPref;
     private SharedPreferences.Editor editor;
     public static final String CATPREF = "catpref";
+
+    String code;
 
     Button btStartQuiz;
     int i = 0;
@@ -44,6 +50,13 @@ public class QuizLoading extends AppCompatActivity {
     String correct = "0",wrong = "0";
     int count = -1;
 
+    RecyclerView rvLeaderboard;
+    private StaggeredGridLayoutManager staggeredGridLayoutManager;
+    private LeaderboardAdapter quizAdapter;
+    private ArrayList<LeaderboardModel> quizModelArrayList;
+    private ArrayList<String> namelist = new ArrayList<>();
+    private ArrayList<String> scorelist= new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +68,16 @@ public class QuizLoading extends AppCompatActivity {
         option3.clear();
         option4.clear();
         explanation.clear();
+
+        categoriesPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
+        code = categoriesPref.getString("quizcode", null);
+
+        rvLeaderboard = findViewById(R.id.rvLeaderboard);
+        rvLeaderboard.setHasFixedSize(true);
+        staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, 1);
+        rvLeaderboard.setLayoutManager(staggeredGridLayoutManager);
+        quizAdapter = new LeaderboardAdapter(QuizLoading.this, getListData());
+        rvLeaderboard.setAdapter(quizAdapter);
 
         btStartQuiz = findViewById(R.id.btStartQuiz);
 
@@ -148,9 +171,36 @@ public class QuizLoading extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     uid = user.getUid();
+                    //for leaderboard
+                    DatabaseReference usersReff = FirebaseDatabase.getInstance().getReference("leaderboard/"+code);
+                    usersReff.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    SharedPreferences catPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
-                    String code = catPref.getString("quizcode",null);
+                            namelist.clear();
+                            scorelist.clear();
+
+                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                namelist.add(postSnapshot.getKey());
+                                scorelist.add(postSnapshot.getValue().toString());
+                            }
+
+
+                            rvLeaderboard.setHasFixedSize(true);
+                            staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, 1);
+                            rvLeaderboard.setLayoutManager(staggeredGridLayoutManager);
+                            quizAdapter = new LeaderboardAdapter(QuizLoading.this, getListData());
+                            rvLeaderboard.setAdapter(quizAdapter);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                    //for getting quiz details
 
                     DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("quiz/"+code);
                     usersRef.orderByChild("option1").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -204,5 +254,13 @@ public class QuizLoading extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         mAuth.removeAuthStateListener(mAuthListener);
+    }
+
+    private ArrayList<LeaderboardModel> getListData() {
+        quizModelArrayList = new ArrayList<>();
+        for (int i = 0; i < namelist.size(); i++) {
+            quizModelArrayList.add(new LeaderboardModel(namelist.get(i),scorelist.get(i)));
+        }
+        return quizModelArrayList;
     }
 }
