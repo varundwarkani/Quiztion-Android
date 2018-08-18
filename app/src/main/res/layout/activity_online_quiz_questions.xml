@@ -1,9 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:padding="10dp"
     android:layout_height="match_parent"
     tools:context=".OnlineQuizQuestions">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="100dp"
+        android:id="@+id/rlOnlineAbove"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvOnlineQuizQuestions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Question goes here"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <RadioGroup
+            android:id="@+id/rgOnlineQuizOptions"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvOnlineQuizQuestions">
+
+            <RadioButton
+                android:id="@+id/rbOnlineQuizOption1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Option1"/>
+
+            <RadioButton
+                android:id="@+id/rbOnlineQuizOption2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option2"/>
+
+            <RadioButton
+                android:id="@+id/rbOnlineQuizOption3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option3"/>
+
+            <RadioButton
+                android:id="@+id/rbOnlineQuizOption4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option4"/>
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btOnlineQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:layout_below="@+id/rgOnlineQuizOptions"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/rlOnlineProgress"
+        android:layout_height="100dp"
+        android:layout_marginTop="-100dp"
+        android:layout_below="@+id/rlOnlineAbove">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvOnlineOwn"
+            android:text="Username: "/>
+
+        <ProgressBar
+            android:id="@+id/pbOnlineOwn"
+            style="@style/MyProgressBarTwo"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/tvOnlineOwn"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="1"
+            android:theme="@style/MyProgressBarTwo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvOnlineOpposite"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/tvOnlineOwn"
+            android:text="Opposion: "/>
+
+        <ProgressBar
+            android:id="@+id/pbOnlineOpposite"
+            style="@style/MyProgressBarTwo"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="55dp"
+            android:layout_toRightOf="@+id/tvOnlineOpposite"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="1"
+            android:theme="@style/MyProgressBarTwo" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

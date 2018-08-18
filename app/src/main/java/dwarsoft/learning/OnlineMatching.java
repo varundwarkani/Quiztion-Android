@@ -174,6 +174,7 @@ public class OnlineMatching extends AppCompatActivity {
                                             
                                             Intent intent = new Intent (OnlineMatching.this, OnQuiz.class);
                                             startActivity(intent);
+                                            finish();
 
                                             //make playing 1
                                             //take to next screen and ask it to wait
@@ -214,6 +215,7 @@ public class OnlineMatching extends AppCompatActivity {
                         Toast.makeText(OnlineMatching.this, "Success!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent (OnlineMatching.this, OnQuiz.class);
                         startActivity(intent);
+                        finish();
                     }
                 }
                 else

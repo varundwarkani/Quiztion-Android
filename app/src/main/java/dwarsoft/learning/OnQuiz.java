@@ -1,6 +1,7 @@
 package dwarsoft.learning;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -103,7 +104,18 @@ public class OnQuiz extends AppCompatActivity {
                                             //can proceed both are ready
                                             Toast.makeText(OnQuiz.this, "Both are ready", Toast.LENGTH_SHORT).show();
 
+                                            //set ready to 2 for both
+                                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                            DatabaseReference databaseReference = database.getReference();
+                                            databaseReference.child("playing/"+uid+"/ready").setValue("2");
+                                            databaseReference.child("playing/"+playinguid+"/ready").setValue("2");
+
+
+
                                             //intent here
+                                            Intent intent = new Intent (OnQuiz.this, OnlineQuizQuestions.class);
+                                            startActivity(intent);
+                                            finish();
 
 
                                         }
@@ -111,8 +123,7 @@ public class OnQuiz extends AppCompatActivity {
                                         {
                                             Toast.makeText(OnQuiz.this, "Opponent is ready. Please click on Ready!", Toast.LENGTH_SHORT).show();
                                         }
-                                    }
-                                    else
+                                    } else if (ready.equals("0"))
                                     {
                                         Toast.makeText(OnQuiz.this, "Opponent is not ready...", Toast.LENGTH_SHORT).show();
                                     }
@@ -171,6 +182,8 @@ public class OnQuiz extends AppCompatActivity {
                                                 editor.putString("onlinename",playingwith);
 
                                                 editor.putInt("onlinecount", count);
+
+                                                Log.i("COUNT",String.valueOf(count));
                                                 for(int i=0;i<questions.size();i++)
                                                 {
 
@@ -181,7 +194,7 @@ public class OnQuiz extends AppCompatActivity {
                                                     editor.putString("onlinecorrect" + i, correctoption.get(i));
 
                                                     editor.remove("onlineoption1" + i);
-                                                    editor.putString("option1" + i, option1.get(i));
+                                                    editor.putString("onlineoption1" + i, option1.get(i));
 
                                                     editor.remove("onlineoption2" + i);
                                                     editor.putString("onlineoption2" + i, option2.get(i));
@@ -190,7 +203,7 @@ public class OnQuiz extends AppCompatActivity {
                                                     editor.putString("onlineoption3" + i, option3.get(i));
 
                                                     editor.remove("onlineoption4" + i);
-                                                    editor.putString("option4" + i, option4.get(i));
+                                                    editor.putString("onlineoption4" + i, option4.get(i));
 
                                                     editor.remove("onlineexplanation" + i);
                                                     editor.putString("onlineexplanation" + i, explanation.get(i));
@@ -237,4 +250,5 @@ public class OnQuiz extends AppCompatActivity {
         super.onStop();
         mAuth.removeAuthStateListener(mAuthListener);
     }
+
 }

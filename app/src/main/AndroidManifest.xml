@@ -33,7 +33,8 @@
         <activity android:name=".QuizView" />
         <activity android:name=".OnlineMatching" />
         <activity android:name=".OnQuiz" />
-        <activity android:name=".OnlineQuizQuestions"></activity>
+        <activity android:name=".OnlineQuizQuestions" />
+        <activity android:name=".ResultPage"></activity>
     </application>
 
 </manifest>
