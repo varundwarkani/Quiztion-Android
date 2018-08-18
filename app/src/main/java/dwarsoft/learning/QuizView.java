@@ -26,11 +26,10 @@ import java.util.ArrayList;
 
 import static dwarsoft.learning.QuizLoading.CATPREF;
 
-public class QuizSelect extends AppCompatActivity {
+public class QuizView extends AppCompatActivity {
 
     private SharedPreferences categoriesPref;
     private SharedPreferences.Editor editor;
-    String quizref;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
     Button btQuizSelect;
@@ -38,52 +37,46 @@ public class QuizSelect extends AppCompatActivity {
 
     RecyclerView rvquiz;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
-    private QuizAdapter quizAdapter;
+    private QuizViewAdapter quizAdapter;
     private ArrayList<QuizModel> quizModelArrayList;
     private ArrayList<String> quizlist = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz_select);
+        setContentView(R.layout.activity_quiz_view);
 
-        btQuizSelect = findViewById(R.id.btQuizSelect);
+        btQuizSelect = findViewById(R.id.btQuizView);
         quizlist.clear();
-        rvquiz = findViewById(R.id.rvQuiz);
+        rvquiz = findViewById(R.id.rvQuizView);
         rvquiz.setHasFixedSize(true);
-        staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,1);
+        staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, 1);
         rvquiz.setLayoutManager(staggeredGridLayoutManager);
-        quizAdapter = new QuizAdapter(QuizSelect.this,getListData());
+        quizAdapter = new QuizViewAdapter(QuizView.this, getListData());
         rvquiz.setAdapter(quizAdapter);
 
         categoriesPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
-        quizref = categoriesPref.getString("quizref",null);
 
         btQuizSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 categoriesPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
-                final String selectedcode = categoriesPref.getString("selectedquiz",null);
+                final String selectedcode = categoriesPref.getString("selectedquiz", null);
 
-                if (selectedcode.equals("0"))
-                {
-                    Toast.makeText(QuizSelect.this, "Please select a quiz", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                if (selectedcode.equals("0")) {
+                    Toast.makeText(QuizView.this, "Please select a quiz", Toast.LENGTH_SHORT).show();
+                } else {
 
-                    new AlertDialog.Builder(QuizSelect.this)
-                            .setMessage("Are you sure you want to join "+selectedcode+" quiz?")
+                    new AlertDialog.Builder(QuizView.this)
+                            .setMessage("You want to play?")
                             .setCancelable(false)
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-
-                                    //add to firebase ref
-                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                    DatabaseReference databaseReference = database.getReference();
-                                    databaseReference.child("profile/"+uid+"/quiz/"+selectedcode+"/code").setValue(selectedcode);
-                                    Toast.makeText(QuizSelect.this, "Quiz added!", Toast.LENGTH_SHORT).show();
-
-                                    Intent intent = new Intent (QuizSelect.this, HomeScreen.class);
+                                    SharedPreferences categoriesPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = categoriesPref.edit();
+                                    editor.putString("quizcode",selectedcode);
+                                    editor.commit();
+                                    Intent intent = new Intent (QuizView.this, QuizLoading.class);
                                     startActivity(intent);
                                 }
                             })
@@ -100,17 +93,19 @@ public class QuizSelect extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     uid = user.getUid();
-                    DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference(quizref);
+                    DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("profile/"+uid+"/quiz");
                     usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            quizlist.clear();
                             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                 quizlist.add(postSnapshot.getKey());
                             }
                             rvquiz.setHasFixedSize(true);
-                            staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,1);
+                            staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, 1);
                             rvquiz.setLayoutManager(staggeredGridLayoutManager);
-                            quizAdapter = new QuizAdapter(QuizSelect.this,getListData());
+                            quizAdapter = new QuizViewAdapter(QuizView.this, getListData());
                             rvquiz.setAdapter(quizAdapter);
                         }
 
@@ -126,9 +121,9 @@ public class QuizSelect extends AppCompatActivity {
 
     }
 
-    private ArrayList<QuizModel> getListData(){
+    private ArrayList<QuizModel> getListData() {
         quizModelArrayList = new ArrayList<>();
-        for (int i = 0; i < quizlist.size(); i++){
+        for (int i = 0; i < quizlist.size(); i++) {
             quizModelArrayList.add(new QuizModel(quizlist.get(i)));
         }
         return quizModelArrayList;

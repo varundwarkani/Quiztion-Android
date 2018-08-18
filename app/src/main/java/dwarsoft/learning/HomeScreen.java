@@ -105,11 +105,12 @@ public class HomeScreen extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_list) {
+        if (id == R.id.nav_join) {
             Intent intent = new Intent (HomeScreen.this, list.class);
             startActivity(intent);
         }  else if (id == R.id.nav_list) {
-            Toast.makeText(this, "join", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent (HomeScreen.this, QuizView.class);
+            startActivity(intent);
         } else if (id==R.id.nav_logout){
             Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show();
             new AlertDialog.Builder(this)

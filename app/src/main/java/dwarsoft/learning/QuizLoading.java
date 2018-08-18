@@ -150,7 +150,7 @@ public class QuizLoading extends AppCompatActivity {
                     uid = user.getUid();
 
                     SharedPreferences catPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
-                    String code = catPref.getString("quizcode","1011");
+                    String code = catPref.getString("quizcode",null);
 
                     DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("quiz/"+code);
                     usersRef.orderByChild("option1").addListenerForSingleValueEvent(new ValueEventListener() {

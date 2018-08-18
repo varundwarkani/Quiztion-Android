@@ -2,6 +2,7 @@ package dwarsoft.learning;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -141,7 +142,7 @@ public class QuizQuestions extends AppCompatActivity {
                     }
                 if (last==0)
                 {
-                    
+
                 }
                 else
                 {
@@ -152,6 +153,9 @@ public class QuizQuestions extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Toast.makeText(QuizQuestions.this, "Finished", Toast.LENGTH_SHORT).show();
+
+                                    Intent intent = new Intent (QuizQuestions.this, HomeScreen.class);
+                                    startActivity(intent);
                                 }
                             })
                             .show();
