@@ -102,8 +102,6 @@ public class OnQuiz extends AppCompatActivity {
                                         if (yes==1)
                                         {
                                             //can proceed both are ready
-                                            Toast.makeText(OnQuiz.this, "Both are ready", Toast.LENGTH_SHORT).show();
-
                                             //set ready to 2 for both
                                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                                             DatabaseReference databaseReference = database.getReference();
@@ -121,11 +119,9 @@ public class OnQuiz extends AppCompatActivity {
                                         }
                                         else
                                         {
-                                            Toast.makeText(OnQuiz.this, "Opponent is ready. Please click on Ready!", Toast.LENGTH_SHORT).show();
                                         }
                                     } else if (ready.equals("0"))
                                     {
-                                        Toast.makeText(OnQuiz.this, "Opponent is not ready...", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 

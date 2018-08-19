@@ -26,4 +26,14 @@
         android:background="#76E10D"
         android:textColor="#BF5012"/>
 
+    <ProgressBar
+        android:id="@+id/selectloader"
+        android:theme="@style/ProgressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="127dp"
+        android:layout_weight="1" />
+
 </RelativeLayout>

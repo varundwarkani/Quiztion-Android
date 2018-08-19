@@ -47,7 +47,6 @@ public class OnlineQuizQuestions extends AppCompatActivity {
     int nextpossible;
 
     TextView tvOnlineQuizQuestions;
-
     RadioGroup rgOnlineQuizOptions;
     RadioButton rbOnlineQuizOption1,rbOnlineQuizOption2,rbOnlineQuizOption3,rbOnlineQuizOption4;
     Button btOnlineQuiz;
@@ -100,6 +99,7 @@ public class OnlineQuizQuestions extends AppCompatActivity {
         {
             last = 1;
         }
+
 
         tvOnlineOwn = findViewById(R.id.tvOnlineOwn);
         tvOnlineOpposite = findViewById(R.id.tvOnlineOpposite);

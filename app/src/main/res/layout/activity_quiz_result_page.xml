@@ -10,9 +10,9 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="20dp"
         android:id="@+id/cv1"
         app:cardBackgroundColor="#FFF"
         app:cardCornerRadius="5dp">
@@ -70,7 +70,7 @@
         <Button
             android:layout_width="175dp"
             android:id="@+id/btContinue"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="60dp"
             android:background="#76E10D"
             android:textSize="20dp"
             android:textStyle="bold"

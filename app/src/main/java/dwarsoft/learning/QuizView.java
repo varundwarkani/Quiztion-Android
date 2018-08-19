@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +36,8 @@ public class QuizView extends AppCompatActivity {
     Button btQuizSelect;
     String uid;
 
+    ProgressBar viewloader;
+
     RecyclerView rvquiz;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private QuizViewAdapter quizAdapter;
@@ -45,6 +48,9 @@ public class QuizView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_view);
+
+        viewloader = findViewById(R.id.viewloader);
+        viewloader.setVisibility(View.VISIBLE);
 
         btQuizSelect = findViewById(R.id.btQuizView);
         quizlist.clear();
@@ -102,6 +108,8 @@ public class QuizView extends AppCompatActivity {
                             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                 quizlist.add(postSnapshot.getKey());
                             }
+
+                            viewloader.setVisibility(View.GONE);
                             rvquiz.setHasFixedSize(true);
                             staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, 1);
                             rvquiz.setLayoutManager(staggeredGridLayoutManager);

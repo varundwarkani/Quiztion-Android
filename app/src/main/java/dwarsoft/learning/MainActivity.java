@@ -57,9 +57,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent (MainActivity.this, HomeScreen.class);
-        startActivity(intent);
-
         AssetFileDescriptor afd = null;
         try {
             afd = getAssets().openFd("background.mp3");
