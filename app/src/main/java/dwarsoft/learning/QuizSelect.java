@@ -104,6 +104,9 @@ public class QuizSelect extends AppCompatActivity {
                     usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            quizlist.clear();
+
                             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                 quizlist.add(postSnapshot.getKey());
                             }

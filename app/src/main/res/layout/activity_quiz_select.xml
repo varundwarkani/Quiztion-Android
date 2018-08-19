@@ -4,25 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradiant"
     tools:context=".QuizSelect">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvQuiz"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginBottom="100dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
         />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textStyle="bold"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="120dp"
         android:id="@+id/btQuizSelect"
-        android:layout_below="@+id/rvQuiz"
-        android:text="JOIN"/>
+        android:text="JOIN"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="20dp"
+        android:layout_alignParentBottom="true"
+        android:textStyle="bold"
+        android:background="#76E10D"
+        android:textColor="#BF5012"/>
 
 </RelativeLayout>

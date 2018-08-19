@@ -3,13 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="10dp"
     android:layout_height="match_parent"
+    android:background="@drawable/gradiant"
     tools:context=".QuizQuestions">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Question 4/5"
+        android:padding="5dp"
+        android:background="@drawable/border"
+        android:textStyle="bold"
+        android:id="@+id/tvRemaining"
+        android:textColor="#FFF"
+        android:textSize="20dp"/>
 
         <TextView
             android:id="@+id/tvQuizQuestions"
             android:layout_width="match_parent"
+            android:layout_below="@+id/tvRemaining"
             android:layout_height="wrap_content"
             android:text="Question goes here"
             android:textAppearance="?android:attr/textAppearanceLarge" />

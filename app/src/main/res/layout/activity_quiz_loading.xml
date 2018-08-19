@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D3D3D3"
+    android:background="@drawable/winning"
     tools:context=".QuizLoading">
 
     <TextView
@@ -13,12 +13,14 @@
         android:textAlignment="center"
         android:text="LEADERBOARD"
         android:layout_marginTop="5dp"
+        android:textColor="#FFF"
         android:id="@+id/leaderboardheader"
         android:textStyle="bold"
         android:textSize="20dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvLeaderboard"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_below="@+id/leaderboardheader"
         android:layout_height="match_parent"
@@ -38,8 +40,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="Start Quiz!"
-        android:textColor="#ffffff"
-        android:textSize="15dp"
+        android:textColor="#BF5012"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
 </RelativeLayout>

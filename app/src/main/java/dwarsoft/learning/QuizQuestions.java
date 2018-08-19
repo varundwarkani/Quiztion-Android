@@ -47,6 +47,8 @@ public class QuizQuestions extends AppCompatActivity {
     RadioGroup rgQuizOptions;
     RadioButton rbQuizOption1,rbQuizOption2,rbQuizOption3,rbQuizOption4;
 
+    TextView tvRemaining;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +66,9 @@ public class QuizQuestions extends AppCompatActivity {
         correct = catPref.getInt("correct", 0);
         wrong = catPref.getInt("wrong", 0);
         final int answered = catPref.getInt("answered", 0);
+
+        tvRemaining = findViewById(R.id.tvRemaining);
+        tvRemaining.setText("Question "+String.valueOf(answered)+"/"+String.valueOf(size));
 
         if (answered<size)
         {

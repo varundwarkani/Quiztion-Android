@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent (MainActivity.this, QuizView.class);
+        Intent intent = new Intent (MainActivity.this, HomeScreen.class);
         startActivity(intent);
 
         AssetFileDescriptor afd = null;
