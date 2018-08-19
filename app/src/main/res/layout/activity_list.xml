@@ -4,93 +4,162 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradiant"
     tools:context=".list">
 
-    <TextView
-        android:id="@+id/selectcoll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="111dp"
-        android:layout_marginTop="83dp"
-        android:padding="5dp"
-        android:text="Select College"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="50dp"
+        android:id="@+id/cv1"
+        app:cardBackgroundColor="#6349C7"
+        app:cardCornerRadius="5dp"
+        >
 
-    <Spinner
-        android:id="@+id/spinnerCollege"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="105dp"
-        android:layout_below="@+id/selectcoll"
-        android:popupBackground="#FFF" />
+        <TextView
+            android:id="@+id/selectcoll"
+            android:textColor="#FFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginLeft="60dp"
+            android:text="Select College"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Department"
-        android:textSize="20dp"
-        android:id="@+id/deptheader"
-        android:textStyle="bold"
-        android:layout_below="@+id/spinnerCollege"
-        android:layout_marginStart="125dp"/>
+        <Spinner
+            android:id="@+id/spinnerCollege"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="#FFF"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/selectcoll"
+            android:popupBackground="#FFF" />
 
-    <Spinner
-        android:id="@+id/spinnerDept"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/deptheader"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="100dp"
-        android:popupBackground="#FFF" />
+    </android.support.v7.widget.CardView>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Year"
-        android:textSize="20dp"
-        android:id="@+id/yearheader"
-        android:textStyle="bold"
-        android:layout_below="@+id/spinnerDept"
-        android:layout_marginStart="165dp"/>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:id="@+id/cv2"
+        android:layout_below="@+id/cv1"
+        app:cardBackgroundColor="#6349C7"
+        app:cardCornerRadius="5dp"
+        >
 
-    <Spinner
-        android:id="@+id/spinnerYear"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/yearheader"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="100dp"
-        android:popupBackground="#FFF" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Department"
+            android:textSize="20dp"
+            android:id="@+id/deptheader"
+            android:padding="5dp"
+            android:layout_marginLeft="75dp"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:layout_below="@+id/spinnerCollege"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Room"
-        android:textSize="20dp"
-        android:id="@+id/roomheader"
-        android:textStyle="bold"
-        android:layout_below="@+id/spinnerYear"
-        android:layout_marginStart="165dp"/>
+        <Spinner
+            android:id="@+id/spinnerDept"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="#FFF"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/deptheader"
+            android:layout_marginTop="40dp"
+            android:popupBackground="#FFF" />
 
-    <Spinner
-        android:id="@+id/spinnerRoom"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/roomheader"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="100dp"
-        android:popupBackground="#FFF" />
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:id="@+id/cv3"
+        android:layout_below="@+id/cv2"
+        app:cardBackgroundColor="#6349C7"
+        app:cardCornerRadius="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Year"
+            android:textSize="20dp"
+            android:id="@+id/yearheader"
+            android:padding="5dp"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:layout_below="@+id/spinnerDept"
+            android:layout_marginLeft="105dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerYear"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="#FFF"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/yearheader"
+            android:layout_marginTop="40dp"
+            android:popupBackground="#FFF" />
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:id="@+id/cv4"
+        android:layout_below="@+id/cv3"
+        app:cardBackgroundColor="#6349C7"
+        app:cardCornerRadius="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Room"
+            android:textSize="20dp"
+            android:id="@+id/roomheader"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:layout_below="@+id/spinnerYear"
+            android:layout_marginLeft="100dp"
+            android:textColor="#FFF"/>
+
+        <Spinner
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="#FFF"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:popupBackground="#FFF"
+            android:id="@+id/spinnerRoom"
+            android:layout_below="@+id/roomheader"/>
+
+    </android.support.v7.widget.CardView>
 
     <Button
         android:id="@+id/btContinue"
-        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:textColor="#BF5012"
         android:layout_height="wrap_content"
+        android:background="#76E10D"
         android:layout_below="@+id/spinnerRoom"
-        android:layout_marginStart="120dp"
         android:textStyle="bold"
         android:text="CONTINUE"
         android:textSize="20dp"/>

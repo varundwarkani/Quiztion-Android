@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".HomeScreen"
-            android:label="QuizTion"
+            android:label="@string/title_activity_home_screen"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TeacherHome"
@@ -28,7 +28,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".QuizQuestions" />
         <activity android:name=".QuizLoading" />
-        <activity android:name=".list" />
+        <activity android:name=".list"
+            android:label="Join Subjects"/>
         <activity android:name=".QuizSelect" />
         <activity android:name=".QuizView" />
         <activity android:name=".OnlineMatching" />

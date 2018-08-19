@@ -65,7 +65,7 @@
                 android:background="@drawable/online"
                 android:textColor="#BF5012"
                 android:layout_marginLeft="92dp"
-                android:text="Online Challenge"
+                android:text="Multiplayer Mode"
                 android:textSize="16dp" />
 
         </RelativeLayout>

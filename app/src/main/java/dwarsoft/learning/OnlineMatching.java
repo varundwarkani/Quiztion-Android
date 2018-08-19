@@ -123,6 +123,7 @@ public class OnlineMatching extends AppCompatActivity {
         //check if child is there in online. else check in playing. if yes, take the current to quiz screen
         // else nothing
 
+        Toast.makeText(this, "Finding users", Toast.LENGTH_SHORT).show();
         DatabaseReference databaseref = FirebaseDatabase.getInstance().getReference();
         databaseref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -132,7 +133,6 @@ public class OnlineMatching extends AppCompatActivity {
 
                             if (childcount==1)
                             {
-                                Toast.makeText(OnlineMatching.this, "No online users...please wait", Toast.LENGTH_SHORT).show();
                             }
                             else
                             {
@@ -169,8 +169,6 @@ public class OnlineMatching extends AppCompatActivity {
 
                                             databaseReference.child("online/"+uid+"/match").setValue("1");
                                             databaseReference.child("online/"+uidd+"/match").setValue("1");
-                                            Toast.makeText(OnlineMatching.this, "Success! Found a match", Toast.LENGTH_SHORT).show();
-
                                             
                                             Intent intent = new Intent (OnlineMatching.this, OnQuiz.class);
                                             startActivity(intent);
@@ -181,7 +179,6 @@ public class OnlineMatching extends AppCompatActivity {
                                         }
                                         else
                                         {
-                                            Toast.makeText(OnlineMatching.this, "no one looking for a match", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
@@ -197,7 +194,7 @@ public class OnlineMatching extends AppCompatActivity {
     }
 
     public void join(){
-        Toast.makeText(this, "Finding users...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Finding users", Toast.LENGTH_SHORT).show();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
         databaseReference.child("online/"+uid+"/looking").setValue("1");
@@ -206,13 +203,11 @@ public class OnlineMatching extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
                 if (dataSnapshot.hasChild(uid))
                 {
                     String match = dataSnapshot.child(uid+"/match").getValue().toString();
                     if (match.equals("1"))
                     {
-                        Toast.makeText(OnlineMatching.this, "Success!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent (OnlineMatching.this, OnQuiz.class);
                         startActivity(intent);
                         finish();

@@ -3,6 +3,8 @@ package dwarsoft.learning;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.CountDownTimer;
@@ -33,6 +35,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -53,8 +57,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent (MainActivity.this, HomeScreen.class);
+        Intent intent = new Intent (MainActivity.this, QuizView.class);
         startActivity(intent);
+
+        AssetFileDescriptor afd = null;
+        try {
+            afd = getAssets().openFd("background.mp3");
+            MediaPlayer player = new MediaPlayer();
+            player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+            player.prepare();
+            player.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         mainprogress = findViewById(R.id.mainprogress);
         mainprogress.setVisibility(View.GONE);

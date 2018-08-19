@@ -4,34 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradiant"
     tools:context=".OnlineMatching">
 
-    <TextView
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvOnlinePlayers"
-        android:text="Players Online: Loading..."
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:gravity="center" />
+        android:layout_height="450dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp"
+        android:id="@+id/cv4"
+        app:cardBackgroundColor="#6349C7"
+        app:cardCornerRadius="5dp"
+        >
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="SEARCH"
-        android:id="@+id/btSearch"
-        android:layout_below="@+id/tvOnlinePlayers"
-        android:textSize="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvOnlinePlayers"
+            android:text="Players Online: Loading..."
+            android:textSize="20dp"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:gravity="center" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="JOIN"
-        android:id="@+id/btJoin"
-        android:layout_below="@+id/btSearch"
-        android:textSize="20dp"/>
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:textStyle="bold"
+            android:text="SEARCH"
+            android:background="#F9E721"
+            android:textColor="#BF5012"
+            android:layout_marginTop="260dp"
+            android:id="@+id/btSearch"
+            android:layout_marginLeft="75dp"
+            android:layout_below="@+id/tvOnlinePlayers"
+            android:textSize="20dp"/>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:textStyle="bold"
+            android:textColor="#BF5012"
+            android:background="#76E10D"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="130dp"
+            android:text="JOIN"
+            android:id="@+id/btJoin"
+            android:layout_below="@+id/btSearch"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:layout_marginTop="210dp"
+            android:layout_gravity="center"
+            android:text="A GAME BETWEEN PEOPLE!"/>
+
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>
