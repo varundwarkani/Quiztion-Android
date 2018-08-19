@@ -47,9 +47,13 @@ public class OnlineQuizQuestions extends AppCompatActivity {
     int nextpossible;
 
     TextView tvOnlineQuizQuestions;
+
     RadioGroup rgOnlineQuizOptions;
     RadioButton rbOnlineQuizOption1,rbOnlineQuizOption2,rbOnlineQuizOption3,rbOnlineQuizOption4;
     Button btOnlineQuiz;
+
+    TextView tvOnlineRemaining;
+    Button btOnlineoption1,btOnlineoption2,btOnlineoption3,btOnlineoption4;
 
     int size,correct,wrong,answered,last = 0;
     String correctanswer,explanation;
@@ -61,13 +65,14 @@ public class OnlineQuizQuestions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_quiz_questions);
 
+        tvOnlineRemaining = findViewById(R.id.tvOnlineRemaining);
+
+        btOnlineoption1 = findViewById(R.id.btOnlineoption1);
+        btOnlineoption2 = findViewById(R.id.btOnlineoption2);
+        btOnlineoption3 = findViewById(R.id.btOnlineoption3);
+        btOnlineoption4 = findViewById(R.id.btOnlineoption4);
+
         tvOnlineQuizQuestions = findViewById(R.id.tvOnlineQuizQuestions);
-        rgOnlineQuizOptions = findViewById(R.id.rgOnlineQuizOptions);
-        btOnlineQuiz = findViewById(R.id.btOnlineQuiz);
-        rbOnlineQuizOption1 = findViewById(R.id.rbOnlineQuizOption1);
-        rbOnlineQuizOption2 = findViewById(R.id.rbOnlineQuizOption2);
-        rbOnlineQuizOption3 = findViewById(R.id.rbOnlineQuizOption3);
-        rbOnlineQuizOption4 = findViewById(R.id.rbOnlineQuizOption4);
         btOnlineProceed = findViewById(R.id.btOnlineProceed);
 
         SharedPreferences catPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
@@ -75,15 +80,18 @@ public class OnlineQuizQuestions extends AppCompatActivity {
         wrong = catPref.getInt("onlinewrong", 0);
         answered = catPref.getInt("onlineanswered", 0);
         size = catPref.getInt("onlinecount", 0);
+
+        tvOnlineRemaining.setText("Question "+String.valueOf(answered)+"/"+String.valueOf(size));
+
         nextpossible = answered + 1;
         if (answered<size)
         {
             //fetch from sharedpref. set to display
             tvOnlineQuizQuestions.setText(catPref.getString("onlinequestion"+answered,null));
-            rbOnlineQuizOption1.setText(catPref.getString("onlineoption1"+answered,null));
-            rbOnlineQuizOption2.setText(catPref.getString("onlineoption2"+answered,null));
-            rbOnlineQuizOption3.setText(catPref.getString("onlineoption3"+answered,null));
-            rbOnlineQuizOption4.setText(catPref.getString("onlineoption4"+answered,null));
+            btOnlineoption1.setText(catPref.getString("onlineoption1"+answered,null));
+            btOnlineoption2.setText(catPref.getString("onlineoption2"+answered,null));
+            btOnlineoption3.setText(catPref.getString("onlineoption3"+answered,null));
+            btOnlineoption4.setText(catPref.getString("onlineoption4"+answered,null));
             correctanswer = catPref.getString("onlinecorrect"+answered,null);
             explanation = catPref.getString("onlineexplanation"+answered,null);
 
@@ -92,13 +100,6 @@ public class OnlineQuizQuestions extends AppCompatActivity {
         {
             last = 1;
         }
-
-        btOnlineQuiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(OnlineQuizQuestions.this, "Please wait for the data to load...", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         tvOnlineOwn = findViewById(R.id.tvOnlineOwn);
         tvOnlineOpposite = findViewById(R.id.tvOnlineOpposite);
@@ -144,17 +145,112 @@ public class OnlineQuizQuestions extends AppCompatActivity {
                                 }
                             });
 
-                            btOnlineQuiz.setOnClickListener(new View.OnClickListener() {
+                            btOnlineoption1.setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(View view) {
-                                    
+                                public void onClick(View v) {
                                     if (yes==0)
                                     {
-                                        int radioButtonID = rgOnlineQuizOptions.getCheckedRadioButtonId();
-                                        View radioButton = rgOnlineQuizOptions.findViewById(radioButtonID);
-                                        int idx = rgOnlineQuizOptions.indexOfChild(radioButton);
-                                        RadioButton r = (RadioButton)  rgOnlineQuizOptions.getChildAt(idx);
-                                        String selectedtext = r.getText().toString();
+
+                                        btOnlineoption1.setOnClickListener(null);
+                                        btOnlineoption2.setOnClickListener(null);
+                                        btOnlineoption3.setOnClickListener(null);
+                                        btOnlineoption4.setOnClickListener(null);
+
+                                        String selectedtext = btOnlineoption1.getText().toString();
+
+                                        categoriesPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
+                                        editor = categoriesPref.edit();
+                                        answered = answered + 1;
+                                        editor.putInt("onlineanswered",answered);
+                                        editor.commit();
+
+                                        String a = String.valueOf(answered);
+
+                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                        DatabaseReference databaseReference = database.getReference();
+                                        databaseReference.child("playing/"+uid+"/question").setValue(a);
+                                        //set in db also
+
+                                        btOnlineProceed.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                check();
+                                            }
+                                        });
+
+                                        if (selectedtext.equals(correctanswer))
+                                        {
+
+                                            //credit points to the user
+                                            correct = correct + 1;
+                                            editor.putInt("onlinecorrect",correct);
+                                            editor.commit();
+
+                                            int update = Integer.parseInt(ownpoints);
+                                            update = update + 20;
+                                            String newupdate = String.valueOf(update);
+                                            FirebaseDatabase database1 = FirebaseDatabase.getInstance();
+                                            DatabaseReference databaseReference1 = database1.getReference();
+                                            databaseReference1.child("playing/"+uid+"/points").setValue(newupdate);
+
+                                            new AlertDialog.Builder(OnlineQuizQuestions.this)
+                                                    .setMessage("Correct answer! "+explanation+" .")
+                                                    .setCancelable(false)
+                                                    .setPositiveButton("Next", null)
+                                                    .show();
+                                        }
+                                        else
+                                        {
+                                            wrong = wrong + 1;
+                                            editor.putInt("onlinewrong",wrong);
+                                            editor.commit();
+
+                                            new AlertDialog.Builder(OnlineQuizQuestions.this)
+                                                    .setMessage("Wrong answer! "+explanation+" .")
+                                                    .setCancelable(false)
+                                                    .setPositiveButton("Next",null)
+                                                    .show();
+                                        }
+                                        if (last==0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            new AlertDialog.Builder(OnlineQuizQuestions.this)
+                                                    .setMessage("You have finished the quiz. Results: Right Answers: "+String.valueOf(correct)+", Wrong answer: "+String.valueOf(wrong))
+                                                    .setCancelable(false)
+                                                    .setPositiveButton("FINISH", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                                            Toast.makeText(OnlineQuizQuestions.this, "Finished", Toast.LENGTH_SHORT).show();
+
+                                                            Intent intent = new Intent (OnlineQuizQuestions.this, ResultPage.class);
+                                                            startActivity(intent);
+                                                        }
+                                                    })
+                                                    .show();
+                                        }
+                                        yes = 1;
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(OnlineQuizQuestions.this, "Wait for opp...", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+
+
+                            btOnlineoption2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (yes==0)
+                                    {
+                                        btOnlineoption1.setOnClickListener(null);
+                                        btOnlineoption2.setOnClickListener(null);
+                                        btOnlineoption3.setOnClickListener(null);
+                                        btOnlineoption4.setOnClickListener(null);
+                                        String selectedtext = btOnlineoption2.getText().toString();
 
                                         categoriesPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
                                         editor = categoriesPref.edit();
@@ -242,6 +338,192 @@ public class OnlineQuizQuestions extends AppCompatActivity {
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                        }
+                    });
+
+                    btOnlineoption3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (yes==0)
+                            {
+                                btOnlineoption1.setOnClickListener(null);
+                                btOnlineoption2.setOnClickListener(null);
+                                btOnlineoption3.setOnClickListener(null);
+                                btOnlineoption4.setOnClickListener(null);
+                                String selectedtext = btOnlineoption3.getText().toString();
+
+                                categoriesPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
+                                editor = categoriesPref.edit();
+                                answered = answered + 1;
+                                editor.putInt("onlineanswered",answered);
+                                editor.commit();
+
+                                String a = String.valueOf(answered);
+
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference databaseReference = database.getReference();
+                                databaseReference.child("playing/"+uid+"/question").setValue(a);
+                                //set in db also
+
+                                btOnlineProceed.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        check();
+                                    }
+                                });
+
+                                if (selectedtext.equals(correctanswer))
+                                {
+
+                                    //credit points to the user
+                                    correct = correct + 1;
+                                    editor.putInt("onlinecorrect",correct);
+                                    editor.commit();
+
+                                    int update = Integer.parseInt(ownpoints);
+                                    update = update + 20;
+                                    String newupdate = String.valueOf(update);
+                                    FirebaseDatabase database1 = FirebaseDatabase.getInstance();
+                                    DatabaseReference databaseReference1 = database1.getReference();
+                                    databaseReference1.child("playing/"+uid+"/points").setValue(newupdate);
+
+                                    new AlertDialog.Builder(OnlineQuizQuestions.this)
+                                            .setMessage("Correct answer! "+explanation+" .")
+                                            .setCancelable(false)
+                                            .setPositiveButton("Next", null)
+                                            .show();
+                                }
+                                else
+                                {
+                                    wrong = wrong + 1;
+                                    editor.putInt("onlinewrong",wrong);
+                                    editor.commit();
+
+                                    new AlertDialog.Builder(OnlineQuizQuestions.this)
+                                            .setMessage("Wrong answer! "+explanation+" .")
+                                            .setCancelable(false)
+                                            .setPositiveButton("Next",null)
+                                            .show();
+                                }
+                                if (last==0)
+                                {
+
+                                }
+                                else
+                                {
+                                    new AlertDialog.Builder(OnlineQuizQuestions.this)
+                                            .setMessage("You have finished the quiz. Results: Right Answers: "+String.valueOf(correct)+", Wrong answer: "+String.valueOf(wrong))
+                                            .setCancelable(false)
+                                            .setPositiveButton("FINISH", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    Toast.makeText(OnlineQuizQuestions.this, "Finished", Toast.LENGTH_SHORT).show();
+
+                                                    Intent intent = new Intent (OnlineQuizQuestions.this, ResultPage.class);
+                                                    startActivity(intent);
+                                                }
+                                            })
+                                            .show();
+                                }
+                                yes = 1;
+                            }
+                            else
+                            {
+                                Toast.makeText(OnlineQuizQuestions.this, "Wait for opp...", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                    btOnlineoption4.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (yes==0)
+                            {
+                                btOnlineoption1.setOnClickListener(null);
+                                btOnlineoption2.setOnClickListener(null);
+                                btOnlineoption3.setOnClickListener(null);
+                                btOnlineoption4.setOnClickListener(null);
+                                String selectedtext = btOnlineoption4.getText().toString();
+
+                                categoriesPref = getSharedPreferences(CATPREF, Context.MODE_PRIVATE);
+                                editor = categoriesPref.edit();
+                                answered = answered + 1;
+                                editor.putInt("onlineanswered",answered);
+                                editor.commit();
+
+                                String a = String.valueOf(answered);
+
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference databaseReference = database.getReference();
+                                databaseReference.child("playing/"+uid+"/question").setValue(a);
+                                //set in db also
+
+                                btOnlineProceed.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        check();
+                                    }
+                                });
+
+                                if (selectedtext.equals(correctanswer))
+                                {
+
+                                    //credit points to the user
+                                    correct = correct + 1;
+                                    editor.putInt("onlinecorrect",correct);
+                                    editor.commit();
+
+                                    int update = Integer.parseInt(ownpoints);
+                                    update = update + 20;
+                                    String newupdate = String.valueOf(update);
+                                    FirebaseDatabase database1 = FirebaseDatabase.getInstance();
+                                    DatabaseReference databaseReference1 = database1.getReference();
+                                    databaseReference1.child("playing/"+uid+"/points").setValue(newupdate);
+
+                                    new AlertDialog.Builder(OnlineQuizQuestions.this)
+                                            .setMessage("Correct answer! "+explanation+" .")
+                                            .setCancelable(false)
+                                            .setPositiveButton("Next", null)
+                                            .show();
+                                }
+                                else
+                                {
+                                    wrong = wrong + 1;
+                                    editor.putInt("onlinewrong",wrong);
+                                    editor.commit();
+
+                                    new AlertDialog.Builder(OnlineQuizQuestions.this)
+                                            .setMessage("Wrong answer! "+explanation+" .")
+                                            .setCancelable(false)
+                                            .setPositiveButton("Next",null)
+                                            .show();
+                                }
+                                if (last==0)
+                                {
+
+                                }
+                                else
+                                {
+                                    new AlertDialog.Builder(OnlineQuizQuestions.this)
+                                            .setMessage("You have finished the quiz. Results: Right Answers: "+String.valueOf(correct)+", Wrong answer: "+String.valueOf(wrong))
+                                            .setCancelable(false)
+                                            .setPositiveButton("FINISH", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    Toast.makeText(OnlineQuizQuestions.this, "Finished", Toast.LENGTH_SHORT).show();
+
+                                                    Intent intent = new Intent (OnlineQuizQuestions.this, ResultPage.class);
+                                                    startActivity(intent);
+                                                }
+                                            })
+                                            .show();
+                                }
+                                yes = 1;
+                            }
+                            else
+                            {
+                                Toast.makeText(OnlineQuizQuestions.this, "Wait for opp...", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
 

@@ -3,51 +3,73 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="10dp"
+    android:background="@drawable/gradiant"
     android:layout_height="match_parent"
     tools:context=".OnlineQuizQuestions">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_marginBottom="100dp"
-        android:id="@+id/rlOnlineAbove"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:paddingBottom="20dp"
+        android:id="@+id/onlinerecycler"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Question 4/5"
+            android:padding="5dp"
+            android:background="@drawable/border"
+            android:textStyle="bold"
+            android:id="@+id/tvOnlineRemaining"
+            android:textColor="#FFF"
+            android:textSize="20dp"/>
 
         <TextView
             android:id="@+id/tvOnlineQuizQuestions"
             android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_marginTop="20dp"
+            android:textSize="30dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:layout_below="@+id/tvOnlineRemaining"
             android:layout_height="wrap_content"
             android:text="Question goes here"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <RadioGroup
-            android:id="@+id/rgOnlineQuizOptions"
-            android:layout_marginTop="10dp"
+            android:id="@+id/rgQuizOptions"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvOnlineQuizQuestions">
+            android:layout_below="@+id/tvQuizQuestions">
 
             <RadioButton
-                android:id="@+id/rbOnlineQuizOption1"
+                android:id="@+id/rbQuizOption1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="Option1"/>
 
             <RadioButton
-                android:id="@+id/rbOnlineQuizOption2"
+                android:id="@+id/rbQuizOption2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Option2"/>
 
             <RadioButton
-                android:id="@+id/rbOnlineQuizOption3"
+                android:id="@+id/rbQuizOption3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Option3"/>
 
             <RadioButton
-                android:id="@+id/rbOnlineQuizOption4"
+                android:id="@+id/rbQuizOption4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Option4"/>
@@ -55,32 +77,124 @@
         </RadioGroup>
 
         <Button
-            android:id="@+id/btOnlineQuiz"
+            android:id="@+id/btQuiz"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Next"
-            android:layout_below="@+id/rgOnlineQuizOptions"/>
+            android:layout_alignParentBottom="true"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="200dp"
+            android:layout_height="100dp">
+
+            <View
+                android:id="@+id/anchor"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:id="@+id/btOnlineoption1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#BDBDBD"
+                android:textColor="#BF5012"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_toLeftOf="@id/anchor"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="5dip"
+                android:text="option 1" />
+
+            <Button
+                android:id="@+id/btOnlineoption2"
+                android:textColor="#BF5012"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/anchor"
+                android:background="#BDBDBD"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="5dip"
+                android:text="option 2" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="310dp"
+            android:layout_height="100dp">
+
+            <View
+                android:id="@+id/anchor1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:id="@+id/btOnlineoption3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/anchor1"
+                android:background="#BDBDBD"
+                android:textColor="#BF5012"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="5dip"
+                android:text="option 3" />
+
+            <Button
+                android:id="@+id/btOnlineoption4"
+                android:layout_marginLeft="10dp"
+                android:textColor="#BF5012"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/anchor1"
+                android:background="#BDBDBD"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="5dip"
+                android:text="option 4" />
+
+        </RelativeLayout>
 
         <Button
-            android:id="@+id/btOnlineProceed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="175dp"
+            android:layout_height="60dp"
+            android:background="#BDBDBD"
             android:text="Proceed"
-            android:layout_below="@+id/btOnlineQuiz"/>
+            android:id="@+id/btOnlineProceed"
+            android:textStyle="bold"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="430dp"
+            android:textSize="20dp"
+            android:textColor="#BF5012"/>
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/rlOnlineProgress"
+        android:layout_below="@+id/onlinerecycler"
         android:layout_height="100dp"
-        android:layout_marginTop="-100dp"
-        android:layout_below="@+id/rlOnlineAbove">
+        android:background="#6349C7">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvOnlineOwn"
+            android:padding="5dp"
+            android:textColor="#FFF"
             android:text="Username: "/>
 
         <ProgressBar
@@ -101,6 +215,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/tvOnlineOpposite"
             android:layout_marginTop="40dp"
+            android:padding="5dp"
+            android:textColor="#FFF"
             android:layout_below="@+id/tvOnlineOwn"
             android:text="Opposion: "/>
 
@@ -111,7 +227,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_height="30dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="60dp"
             android:layout_toRightOf="@+id/tvOnlineOpposite"
             android:indeterminate="false"
             android:max="100"

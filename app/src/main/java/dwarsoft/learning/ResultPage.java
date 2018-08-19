@@ -102,7 +102,7 @@ public class ResultPage extends AppCompatActivity {
                             {
                                 //you win
                                 tvResult.setText("You Win!");
-                                tvResult.setTextColor(Color.parseColor("#332CD32"));
+                                tvResult.setTextColor(Color.parseColor("#32CD32"));
                             }
                             else if (currpo<oppo)
                             {
