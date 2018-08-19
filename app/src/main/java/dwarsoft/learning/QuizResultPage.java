@@ -73,9 +73,10 @@ public class QuizResultPage extends AppCompatActivity {
                             int ep = Integer.parseInt(exisitingpoints);
                             int newp = Integer.parseInt(points);
                             int updatedpoints = ep + newp;
+                            String up = String.valueOf(updatedpoints);
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference databaseReference = database.getReference();
-                            databaseReference.child("leaderboard/"+code+"/"+name).setValue(updatedpoints);
+                            databaseReference.child("leaderboard/"+code+"/"+name).setValue(up);
                         }
 
                         @Override

@@ -37,7 +37,7 @@
                 android:textColor="#BF5012"
                 android:textStyle="bold"
                 android:layout_marginLeft="92dp"
-                android:text="Current Subjects"
+                android:text="Current Rooms"
                 android:textSize="16dp" />
 
             <Button
@@ -51,7 +51,7 @@
                 android:textColor="#BF5012"
                 android:layout_marginLeft="92dp"
                 android:textStyle="bold"
-                android:text="Join Subjects"
+                android:text="Join Rooms"
                 android:textSize="16dp" />
 
             <Button

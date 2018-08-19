@@ -192,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                                     DatabaseReference databaseReference = database.getReference();
                                     databaseReference.child("profile/"+uid+"/name").setValue(name);
                                     databaseReference.child("profile/"+uid+"/mail").setValue(mail);
+                                    databaseReference.child("profile/"+uid+"/points").setValue("0");
                                     Intent intent = new Intent (MainActivity.this, HomeScreen.class);
                                     startActivity(intent);
                                 }

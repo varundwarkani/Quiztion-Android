@@ -145,7 +145,7 @@ public class OnQuiz extends AppCompatActivity {
 
                                     tvOnlinePlayerName.setText("Playing with: "+playingwith);
                                     tvOnlineQuizName.setText(quizcode);
-                                    tvOnlineQuizQuestions.setText("No. of ques "+String.valueOf(noofques));
+                                    tvOnlineQuizQuestions.setText("No. of Questions: "+String.valueOf(noofques));
 
                                     for (DataSnapshot postSnapshot : dataSnapshot.child("quiz/"+quizcode).getChildren()) {
                                         // store list of correct answers, questions, options - 6 different lists

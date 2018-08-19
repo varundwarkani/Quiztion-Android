@@ -4,47 +4,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#6349C7"
     tools:context=".ResultPage">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvOnlineOwn"
-            android:text="Username: "/>
-
-        <ProgressBar
-            android:id="@+id/pbOnlineOwn"
-            style="@style/MyProgressBarTwo"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="30dp"
-            android:layout_toRightOf="@+id/tvOnlineOwn"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="1"
-            android:theme="@style/MyProgressBarTwo" />
+            android:layout_height="500dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="50dp"
+            android:id="@+id/cv1"
+            app:cardBackgroundColor="#FFF"
+            app:cardCornerRadius="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvOnlineOpposite"
-            android:layout_marginTop="40dp"
-            android:layout_below="@+id/tvOnlineOwn"
-            android:text="Opposion: "/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:layout_marginTop="50dp"
+                    android:textSize="25dp"
+                    android:id="@+id/quizheader"
+                    android:layout_height="wrap_content"
+                    android:text="QUIZ RESULTS"/>
 
-        <ProgressBar
-            android:id="@+id/pbOnlineOpposite"
-            style="@style/MyProgressBarTwo"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="55dp"
-            android:layout_toRightOf="@+id/tvOnlineOpposite"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="1"
-            android:theme="@style/MyProgressBarTwo" />
+                <TextView
+                    android:id="@+id/tvOwnCorrect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="150dp"
+                    android:text="Correct Answers: "/>
+
+                <TextView
+                    android:id="@+id/tvOwnWrong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="200dp"
+                    android:textColor="#000"
+                    android:text="Wrong Answers: "/>
+
+                <TextView
+                    android:id="@+id/tvOppName"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="250dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:text="Opposition Name: " />
+
+                <TextView
+                    android:id="@+id/tvPoints"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="300dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:text="Points Credited: " />
+
+            <TextView
+                android:id="@+id/tvResult"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_marginTop="350dp"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:textColor="#000"
+                android:text="Loading Results..." />
+
+                <Button
+                    android:layout_width="175dp"
+                    android:id="@+id/btFinish"
+                    android:layout_marginLeft="55dp"
+                    android:background="#76E10D"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:textColor="#BF5012"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="430dp"
+                    android:text="continue">
+
+                </Button>
+
+        </android.support.v7.widget.CardView>
 
 </RelativeLayout>

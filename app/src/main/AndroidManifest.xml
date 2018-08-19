@@ -28,15 +28,18 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".QuizQuestions" />
         <activity android:name=".QuizLoading" />
-        <activity android:name=".list"
-            android:label="Join Subjects"/>
+        <activity
+            android:name=".list"
+            android:label="Join Subjects" />
         <activity android:name=".QuizSelect" />
         <activity android:name=".QuizView" />
         <activity android:name=".OnlineMatching" />
         <activity android:name=".OnQuiz" />
         <activity android:name=".OnlineQuizQuestions" />
         <activity android:name=".ResultPage" />
-        <activity android:name=".QuizResultPage"></activity>
+        <activity android:name=".QuizResultPage" />
+        <activity android:name=".Dashboard">
+        </activity>
     </application>
 
 </manifest>

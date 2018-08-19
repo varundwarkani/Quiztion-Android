@@ -68,9 +68,9 @@
             android:text="Points Credited: " />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="175dp"
             android:id="@+id/btContinue"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="70dp"
             android:background="#76E10D"
             android:textSize="20dp"
             android:textStyle="bold"

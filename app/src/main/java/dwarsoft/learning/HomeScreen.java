@@ -159,6 +159,11 @@ public class HomeScreen extends AppCompatActivity
                     "mailto","dwarsoft@gmail.com", null));
             startActivity(Intent.createChooser(emailIntent, "Contact us"));
         }
+        else if (id==R.id.nav_profile)
+        {
+            Intent intent = new Intent (HomeScreen.this, Dashboard.class);
+            startActivity(intent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
